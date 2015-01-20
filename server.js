@@ -1,31 +1,19 @@
 var Express = require ('express');
 var app = Express();
 
-app.use("/a", function(req, res, next) {
-  console.log('route a');
+var routeHandlerA = function(req, res, next) {
+  console.log("Route A");
+  next();
+};
+
+var routeHandlerB = function(req, res, next) {
+  console.log("Route B");
   res.sendStatus(200);
-});
+};
 
-app.use('/b', function(req, res, next) {
-  console.log('route b');
-  var data = {
-    message: 'route b, ok'
-  };
+var rootHandlers = [routeHandlerA, routeHandlerB];
 
-  res.status(200).json(data);
-});
-
-app.use('/c', function(req, res, next) {
-  console.log('route c');
-  res.set('Makersquare-Header', Date.now());
-  res.redirect(301, 'http://makersquare.com');
-});
-
-app.use('/d', function(req, res, next) {
-  console.log('route d');
-  console.log(req.query.name);
-  res.status(200).json({name: req.query.name});
-});
+app.get('/', rootHandlers);
 
 var port = "8080";
 var server = app.listen(port);
