@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title= header
+  body
+    h1.main-header Hello world
+    .container
+      a#link(href="http://makersquare.com") Link to #{destination}
+    - var inputDefinition = {id: "username", placeholder: "username", type: "text", name: "username"}
+    div
+      label(for="username") Username
+      input&attributes(inputDefinition)
+    
