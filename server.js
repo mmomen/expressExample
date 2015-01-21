@@ -1,19 +1,13 @@
 var Express = require ('express');
 var app = Express();
 
-var routeHandlerA = function(req, res, next) {
-  console.log("Route A");
-  next();
-};
+app.use(Express.static(__dirname+"/public"));
 
-var routeHandlerB = function(req, res, next) {
-  console.log("Route B");
-  res.sendStatus(200);
-};
-
-var rootHandlers = [routeHandlerA, routeHandlerB];
-
-app.get('/', rootHandlers);
+app.get("/", function(req, res, next) {
+  res.sendFile("./views/index.html", {
+    root: __dirname
+  });
+});
 
 var port = "8080";
 var server = app.listen(port);
