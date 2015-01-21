@@ -10,4 +10,7 @@ html
     div
       label(for="username") Username
       input&attributes(inputDefinition)
-    
+    div
+      ul
+        each person in [{name: "ryu"}, {name: "ken"}, {name: "chun-li"}]
+          li I am #{person.name}
